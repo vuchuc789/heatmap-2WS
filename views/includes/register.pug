@@ -1,0 +1,45 @@
+#main-container-03.main-container
+    .login-block
+        if errors !== undefined
+            p#error= errors[0]
+        form(
+            action='/user/register'
+            method='post'
+        )
+            label(for='user-name') User name
+            input#user-name(
+                type='text'
+                name='username'
+                autocomplete='off'
+                value= username
+                required
+            )
+            label(for='password1') Password
+            input#password1(
+                type='password'
+                name='password1'
+                autocomplete='off'
+                value= password1
+                required
+            )
+            label(for='password2') Confirm Password
+            input#password2(
+                type='password'
+                name='password2'
+                autocomplete='off'
+                value= password2
+                required
+            )
+            label(for='hostname') Hostname
+            input#hostname(
+                type='text'
+                name='hostname'
+                autocomplete='off'
+                value= hostname
+                required
+            )
+            input#submit(
+                type='submit'
+                value='Register'
+            )
+            a(href='/user/login') Login Page

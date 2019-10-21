@@ -1,5 +1,4 @@
-const path = require('path');
-
+// Index controller
 module.exports = (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
+    res.render('index');
 };

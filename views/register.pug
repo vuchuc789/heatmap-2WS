@@ -1,7 +1,6 @@
 #main-container-03.main-container
     .login-block
-        if errors !== undefined
-            p#error= errors[0]
+        include notification
         form(
             action='/user/register'
             method='post'

@@ -1,6 +1,7 @@
 const db = require('../db/index');
 const bcrypt = require('bcrypt');
 const uuidGeneratorV4 = require('uuid/v4');
+const passport = require('passport');
 
 // Get login page
 exports.loginGet = (req, res) => {
@@ -72,17 +73,25 @@ exports.registerPost = async (req, res) => {
             } else {
                 // hash plaintext password
                 const hashedPassword = await bcrypt.hash(password1, 12);
-                console.log(hashedPassword.length);
                 // store and get user id
-                const results = await db.query('INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id;', [username, hashedPassword]);
+                const results = await db.query('INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id;', [ username, hashedPassword ]);
                 const userID = results.rows[0].id;
                 // store website hostname
-                await db.query('INSERT INTO website (hostname, user_id) VALUES ($1, $2);', [hostname, userID]);
+                await db.query('INSERT INTO website (hostname, user_id) VALUES ($1, $2);', [ hostname, userID ]);
 
+                req.flash('success_message', 'You are now registered and can log in');
                 res.redirect('/user/login');
             }
         } catch (e) {
             console.error(e);
         }
     }
+};
+
+exports.loginPost = (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/user/login',
+        failureFlash: true
+    })(req, res, next);
 };

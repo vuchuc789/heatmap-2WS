@@ -100,3 +100,7 @@ body {
     background-color: black;
 }
 
+.header01, .para, #logout {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}

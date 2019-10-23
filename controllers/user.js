@@ -95,3 +95,9 @@ exports.loginPost = (req, res, next) => {
         failureFlash: true
     })(req, res, next);
 };
+
+exports.logout = (req, res) => {
+    req.logout();
+    req.flash('success_message', 'You are logged out');
+    res.redirect('/user/login');
+};

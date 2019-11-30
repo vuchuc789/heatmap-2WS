@@ -48,6 +48,8 @@ app.use((req, res, next) => {
 
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
+app.use('/page', require('./routes/page'));
+app.use('/click', require('./routes/click'));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port} !!!`);

@@ -7,7 +7,7 @@ module.exports = (passport) => {
         try {
             const results = await db.query('SELECT * FROM "user" WHERE username=$1 LIMIT 1;', [ username ]);
             if (!results.rows.length) {
-                return done(null, false, { message: 'That email is not registered' });
+                return done(null, false, { message: 'That username is not registered' });
             }
 
             const user = results.rows[0];

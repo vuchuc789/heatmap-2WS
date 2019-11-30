@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { homePage, dashboard} = require('../controllers/index');
-const { ensureAuthenticated } = require('../helpers/auth');
+const { ensureAuthenticated } = require('../middlewares/auth');
 
 const route = express.Router();
 

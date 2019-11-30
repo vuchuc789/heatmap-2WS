@@ -1,12 +1,14 @@
 const express = require('express');
 const { loginGet, registerGet, loginPost , registerPost, logout } = require('../controllers/user');
+const { checkInputRegister, checkUsernameRegister } = require('../middlewares/user');
+const { checkWebsiteRegister } = require('../middlewares/site');
 
-const router = express.Router();
+const route = express.Router();
 
-router.get('/login', loginGet);
-router.get('/register', registerGet);
-router.post('/login', loginPost);
-router.post('/register', registerPost);
-router.get('/logout', logout);
+route.get('/login', loginGet);
+route.get('/register', registerGet);
+route.post('/login', loginPost);
+route.post('/register', checkInputRegister, checkUsernameRegister, checkWebsiteRegister, registerPost);
+route.get('/logout', logout);
 
-module.exports = router;
+module.exports = route;

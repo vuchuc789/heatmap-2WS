@@ -1,11 +1,18 @@
 const express = require('express');
 
-const { homePage, dashboard} = require('../controllers/index');
 const { ensureAuthenticated } = require('../middlewares/auth');
 
 const route = express.Router();
 
-route.get('/', homePage);
-route.get('/dashboard', ensureAuthenticated, dashboard);
+route.get('/', (req, res) => {
+  res.render('index');
+});
+
+route.get('/dashboard', ensureAuthenticated, (req, res) => {
+  res.render('index', {
+    page: 'dashboard',
+    username: req.user.username
+  });
+});
 
 module.exports = route;
